@@ -1,7 +1,7 @@
 {
-  "name": "tracklib",
-  "version": "1.0.0",
-  "description": "",
+  "name": "Anemoi",
+  "version": "0.0.1",
+  "description": "Vedra AI plugin for tracking(click, swipe)",
   "main": "index.js",
   "scripts": {
     "build": "babel lib -d build",
@@ -10,7 +10,7 @@
     "lint:watch": "esw -w lib/**",
     "prepublish": "npm run build"
   },
-  "author": "conor byrne <you@example.com> (http://yourblog.com)",
+  "author": "conor byrne <conor@vedra.io>",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -23,10 +23,11 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "eslint-watch": "^4.0.2",
-    "polished": "^1.9.3",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "styled-components": "^3.4.2"
+    "prop-types": "^15.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "just-detect-adblock": "^1.0.0",
+    "rollbar": "^2.4.4"
   }
 }
