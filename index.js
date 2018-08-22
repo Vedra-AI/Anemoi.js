@@ -4,58 +4,43 @@ import {trackLeftClick, trackRightClick, trackUniqueClick, eventHandler} from '.
 import {trackSwipeLeft, trackSwipeRight} from './lib/events/swipe'
 
 
-
 class Options {
-    constructor(url, apiId, channelID) {
-        this.url = url;
-        this.apiId = apiId
-        this.channelID = channelID
-    }
-    air_init () {
-        CONFIG.url = this.url
-        CONFIG.apiId = this.apiId
-        CONFIG.channelID = this.channelID
+    constructor(opt) {
+        this.url = opt.url;
+        this.apiId = opt.apiKey
+        this.channelID = opt.channelId
     }
     air_left (campaign, campaignID) {
-        CONFIG.initTimestap.nanos = getNanos()
-        CONFIG.initTimestap.seconds = getSecounds()
-        CONFIG.name = 'leftClick'
-        CONFIG.campaign = campaign
-        CONFIG.campaignID = campaignID
-        eventHandler(CONFIG)
+        const obj = new Event('leftClick', campaign, campaignID, this.channelID, this.url, this.apiId)
+        eventHandler(obj)
     }
     air_right (campaign, campaignID) {
-        CONFIG.initTimestap.nanos = getNanos()
-        CONFIG.initTimestap.seconds = getSecounds()
-        CONFIG.name = 'rightClick'
-        CONFIG.campaign = campaign
-        CONFIG.campaignID = campaignID
-        eventHandler(CONFIG)
+        const obj = new Event('rightClick', campaign, campaignID, this.channelID, this.url, this.apiId)
+        eventHandler(obj)
     }
     air_unique (campaign, campaignID) {
-        CONFIG.initTimestap.nanos = getNanos()
-        CONFIG.initTimestap.seconds = getSecounds()
-        CONFIG.name = 'uniqueClick'
-        CONFIG.campaign = campaign
-        CONFIG.campaignID = campaignID
-        eventHandler(CONFIG)
+        const obj = new Event('uniqueClick', campaign, campaignID, this.channelID, this.url, this.apiId)
+        eventHandler(obj)
     }
     air_swipeLeft (campaign, campaignID) {
-        CONFIG.initTimestap.nanos = getNanos()
-        CONFIG.initTimestap.seconds = getSecounds()
-        CONFIG.name = 'swipeLeft'
-        CONFIG.campaign = campaign
-        CONFIG.campaignID = campaignID
-        eventHandler(campaign, campaignID)
+        const obj = new Event('swipeLeft', campaign, campaignID, this.channelID, this.url, this.apiId)
+        eventHandler(obj)
     }
     air_swipeRight (campaign, campaignID) {
-        CONFIG.initTimestap.nanos = getNanos()
-        CONFIG.initTimestap.seconds = getSecounds()
-        CONFIG.name = 'swipeRight'
-        CONFIG.campaign = campaign
-        CONFIG.campaignID = campaignID
-        eventHandler(campaign, campaignID)
+        const obj = new Event('swipeRight', campaign, campaignID, this.channelID, this.url, this.apiId)
+        eventHandler(obj)
     }
 }
-
+class Event {
+    constructor(name, campaign, campaignId, channelID,url, apiId, nanos, seconds) {
+        this.name = name
+        this.campaign = campaign
+        this.campaignId = campaignId
+        this.nanos = getNanos()
+        this.channelID = channelID
+        this.url = url
+        this.apiId = apiId
+        this.seconds = getSecounds()
+    }
+}
 export {Options  as default}
