@@ -1,7 +1,6 @@
 import CONFIG from './lib/config/config'
 import {initTimestap, getNanos, getSecounds} from './lib/time-stamp/initialTimestamp'
 import {trackLeftClick, trackRightClick, trackUniqueClick, eventHandler} from './lib/events/click'
-import {trackSwipeLeft, trackSwipeRight} from './lib/events/swipe'
 
 
 class Options {
@@ -11,27 +10,32 @@ class Options {
         this.channelID = opt.channelId
     }
     air_left (campaign, campaignID) {
-        const obj = new Event('leftClick', campaign, campaignID, this.channelID, this.url, this.apiId)
-        eventHandler(obj)
+
+        new EventHandler('leftClick', campaign, campaignID, this.channelID, this.url, this.apiId)
+
     }
     air_right (campaign, campaignID) {
-        const obj = new Event('rightClick', campaign, campaignID, this.channelID, this.url, this.apiId)
-        eventHandler(obj)
+
+        new EventHandler('rightClick', campaign, campaignID, this.channelID, this.url, this.apiId)
+
     }
     air_unique (campaign, campaignID) {
-        const obj = new Event('uniqueClick', campaign, campaignID, this.channelID, this.url, this.apiId)
-        eventHandler(obj)
+
+        new EventHandler('uniqueClick', campaign, campaignID, this.channelID, this.url, this.apiId)
+
     }
     air_swipeLeft (campaign, campaignID) {
-        const obj = new Event('swipeLeft', campaign, campaignID, this.channelID, this.url, this.apiId)
-        eventHandler(obj)
+
+        new EventHandler('swipeLeft', campaign, campaignID, this.channelID, this.url, this.apiId)
+
     }
     air_swipeRight (campaign, campaignID) {
-        const obj = new Event('swipeRight', campaign, campaignID, this.channelID, this.url, this.apiId)
-        eventHandler(obj)
+
+        new EventHandler('swipeRight', campaign, campaignID, this.channelID, this.url, this.apiId)
+
     }
 }
-class Event {
+class EventHandler {
     constructor(name, campaign, campaignId, channelID,url, apiId, nanos, seconds) {
         this.name = name
         this.campaign = campaign
@@ -41,6 +45,11 @@ class Event {
         this.url = url
         this.apiId = apiId
         this.seconds = getSecounds()
+        this.initEventHandler()
+    }
+    initEventHandler () {
+        eventHandler(this)
     }
 }
+
 export {Options  as default}
